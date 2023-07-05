@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import API_KEY from 'utils/api';
+
+//HomePage odpowiada za wyświetlanie najpopularniejszych filmów na stronie głównej
 
 function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -10,7 +13,9 @@ function HomePage() {
 
   const fetchTrendingMovies = async () => {
     try {
-      const response = await axios.get('/trending/get-trending');
+      const response = await axios.get(
+        `/trending/get-trending?api_key=${API_KEY}`
+      );
       setMovies(response.data.results);
     } catch (error) {
       console.log(error);

@@ -6,8 +6,6 @@ import Cast from './Cast/Cast';
 import Reviews from './Reviews/Reviews';
 import Movies from './Movies/Movies';
 
-// import API_KEY from '../utils/api';
-
 const App = () => {
   return (
     <div>
