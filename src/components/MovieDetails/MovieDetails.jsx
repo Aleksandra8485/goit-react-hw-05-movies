@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,38 +8,38 @@ function MovieDetails() {
   const [cast, setCast] = useState([]);
   const [reviews, setReviews] = useState([]);
 
-  useEffect(() => {
-    fetchMovieDetails();
-    fetchMovieCredits();
-    fetchMovieReviews();
-  }, []);
-
-  const fetchMovieDetails = async () => {
+  const fetchMovieDetails = useCallback(async () => {
     try {
       const response = await axios.get(`/movies/get-movie-details?id=${id}`);
       setMovie(response.data);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [id]);
 
-  const fetchMovieCredits = async () => {
+  const fetchMovieCredits = useCallback(async () => {
     try {
       const response = await axios.get(`/movies/get-movie-credits?id=${id}`);
       setCast(response.data.cast);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [id]);
 
-  const fetchMovieReviews = async () => {
+  const fetchMovieReviews = useCallback(async () => {
     try {
       const response = await axios.get(`/movies/get-movie-reviews?id=${id}`);
       setReviews(response.data.results);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchMovieCredits();
+    fetchMovieDetails();
+    fetchMovieReviews();
+  }, [fetchMovieCredits, fetchMovieDetails, fetchMovieReviews]);
 
   if (!movie) {
     return <div>Loading...</div>;
