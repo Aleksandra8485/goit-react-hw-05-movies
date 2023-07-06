@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchTrendingMovies } from 'utils/api';
 
-// //Ustawienie baseURL dla wszystkich zapytań Axios
-// axios.defaults.baseURL = 'https://api.themoviedb.org/3/movie/popular';
-
 //HomePage odpowiada za wyświetlanie najpopularniejszych filmów na stronie głównej
 
 function HomePage() {
