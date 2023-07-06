@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -6,20 +6,35 @@ function Reviews() {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
 
-  useEffect(() => {
-    const fetchMovieReviews = async () => {
-      try {
-        const response = await axios.get(
-          `/movies/get-movie-reviews?id=${movieId}`
-        );
-        setReviews(response.data.results);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchMovieReviews();
+  const fetchMovieReviews = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `/movies/get-movie-reviews?id=${movieId}`
+      );
+      setReviews(response.data.results);
+    } catch (error) {
+      console.log(error);
+    }
   }, [movieId]);
+
+  useEffect(() => {
+    fetchMovieReviews();
+  }, [fetchMovieReviews]);
+
+  //   useEffect(() => {
+  //     const fetchMovieReviews = async () => {
+  //       try {
+  //         const response = await axios.get(
+  //           `/movies/get-movie-reviews?id=${movieId}`
+  //         );
+  //         setReviews(response.data.results);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
+
+  //     fetchMovieReviews();
+  //   }, [movieId]);
 
   return (
     <div>
