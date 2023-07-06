@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-// import API_KEY from 'utils/api';
+import { fetchTrendingMovies } from 'utils/api';
 
-//Ustawienie baseURL dla wszystkich zapytań Axios
-axios.defaults.baseURL = 'https://api.themoviedb.org/3/movie/popular';
+// //Ustawienie baseURL dla wszystkich zapytań Axios
+// axios.defaults.baseURL = 'https://api.themoviedb.org/3/movie/popular';
 
 //HomePage odpowiada za wyświetlanie najpopularniejszych filmów na stronie głównej
 
@@ -11,31 +10,12 @@ function HomePage() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetchTrendingMovies();
+    fetchMovies();
   }, []);
 
-  // const fetchTrendingMovies = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `/trending/get-trending?api_key=${API_KEY}`
-  //     );
-  //     setMovies(response.data.results);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  const fetchTrendingMovies = async () => {
-    try {
-      const response = await axios.get('/trending/get-trending', {
-        params: {
-          api_key: '5aa46e061141b6aa48191a62115cc996',
-        },
-      });
-      setMovies(response.data.results);
-    } catch (error) {
-      console.log(error);
-    }
+  const fetchMovies = async () => {
+    const moviesData = await fetchTrendingMovies();
+    setMovies(moviesData);
   };
 
   return (
