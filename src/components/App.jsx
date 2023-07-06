@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Link, Routes } from 'react-router-dom';
-import HomePage from './HomePage/HomePage';
+import HomePage from './Pages/HomePage/HomePage';
 import MovieDetails from './MovieDetails/MovieDetails';
 import Cast from './Cast/Cast';
 import Reviews from './Reviews/Reviews';
