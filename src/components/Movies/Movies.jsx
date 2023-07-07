@@ -45,7 +45,14 @@ const Movies = () => {
           <h2>Search Results</h2>
           {searchResults.map(movie => (
             <div key={movie.id}>
-              <h3 onClick={() => handleMovieClick(movie.id)}>{movie.title}</h3>
+              <h3>
+                <Link
+                  to={`/movies/${movie.id}`}
+                  onClick={() => handleMovieClick(movie.id)}
+                >
+                  {movie.title}
+                </Link>
+              </h3>
               <p>{movie.overview}</p>
             </div>
           ))}
