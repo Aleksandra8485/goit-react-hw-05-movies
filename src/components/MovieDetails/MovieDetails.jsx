@@ -8,8 +8,8 @@ import { API_KEY } from 'utils/api';
 function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-  const [cast, setCast] = useState([]);
-  const [reviews, setReviews] = useState([]);
+  // const [cast, setCast] = useState([]);
+  // const [reviews, setReviews] = useState([]);
 
   const fetchMovieDetails = useCallback(async () => {
     try {
@@ -24,37 +24,37 @@ function MovieDetails() {
     }
   }, [movieId]);
 
-  const fetchMovieCredits = useCallback(async () => {
-    try {
-      const response = await axios.get(`/movie/${movieId}/credits`, {
-        params: {
-          api_key: API_KEY,
-        },
-      });
-      setCast(response.data.cast);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [movieId]);
+  // const fetchMovieCredits = useCallback(async () => {
+  //   try {
+  //     const response = await axios.get(`/movie/${movieId}/credits`, {
+  //       params: {
+  //         api_key: API_KEY,
+  //       },
+  //     });
+  //     setCast(response.data.cast);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [movieId]);
 
-  const fetchMovieReviews = useCallback(async () => {
-    try {
-      const response = await axios.get(`/movie/${movieId}/reviews`, {
-        params: {
-          api_key: API_KEY,
-        },
-      });
-      setReviews(response.data.results);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [movieId]);
+  // const fetchMovieReviews = useCallback(async () => {
+  //   try {
+  //     const response = await axios.get(`/movie/${movieId}/reviews`, {
+  //       params: {
+  //         api_key: API_KEY,
+  //       },
+  //     });
+  //     setReviews(response.data.results);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [movieId]);
 
   useEffect(() => {
     fetchMovieDetails();
-    fetchMovieCredits();
-    fetchMovieReviews();
-  }, [fetchMovieDetails, fetchMovieCredits, fetchMovieReviews]);
+    // fetchMovieCredits();
+    // fetchMovieReviews();
+  }, [fetchMovieDetails]);
 
   if (!movie) {
     return <div>Loading...</div>;
