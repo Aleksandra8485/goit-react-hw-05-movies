@@ -1,36 +1,24 @@
 import React from 'react';
-import { Route, Link, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/HomePage/HomePage';
 import MovieDetails from './MovieDetails/MovieDetails';
 import Cast from './Cast/Cast';
 import Reviews from './Reviews/Reviews';
 import Movies from './Movies/Movies';
+import SharedLayout from './SharedLayout/SharedLayout';
 
 const App = () => {
   return (
-    <div>
-      <header>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/movies">Movies</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
-
-      <Routes>
-        <Route path="/" element={<HomePage />} />
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<HomePage />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:movieId" element={<MovieDetails />}>
           <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<Reviews />} />
         </Route>
-      </Routes>
-    </div>
+      </Route>
+    </Routes>
   );
 };
 
