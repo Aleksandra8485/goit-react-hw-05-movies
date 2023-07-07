@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchTrendingMovies } from 'utils/api';
+import { getTrendingMovies } from 'utils/api';
 
 //HomePage odpowiada za wyświetlanie najpopularniejszych filmów na stronie głównej
 
@@ -11,8 +11,13 @@ function HomePage() {
   }, []);
 
   const fetchMovies = async () => {
-    const moviesData = await fetchTrendingMovies();
-    setMovies(moviesData);
+    try {
+      const trendingMovies = await getTrendingMovies();
+      setMovies(trendingMovies);
+    } catch (error) {
+      console.log(error);
+      setMovies([]);
+    }
   };
 
   return (
