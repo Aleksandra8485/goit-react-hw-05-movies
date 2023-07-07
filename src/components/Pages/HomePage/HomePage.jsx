@@ -34,7 +34,7 @@ function HomePage() {
     <div>
       <h1>Trending Movies</h1>
       {movies.map(movie => (
-        <div key={movie.id}>
+        <div key={movie.id} onClick={() => fetchMovieDetails(movie.id)}>
           <h2>{movie.title}</h2>
           <p>{movie.overview}</p>
         </div>
