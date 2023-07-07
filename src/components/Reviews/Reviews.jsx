@@ -8,9 +8,7 @@ function Reviews() {
 
   const fetchMovieReviews = useCallback(async () => {
     try {
-      const response = await axios.get(
-        `/movies/get-movie-reviews?id=${movieId}`
-      );
+      const response = await axios.get(`/movie/${movieId}/reviews`);
       setReviews(response.data.results);
     } catch (error) {
       console.log(error);
@@ -20,21 +18,6 @@ function Reviews() {
   useEffect(() => {
     fetchMovieReviews();
   }, [fetchMovieReviews]);
-
-  //   useEffect(() => {
-  //     const fetchMovieReviews = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `/movies/get-movie-reviews?id=${movieId}`
-  //         );
-  //         setReviews(response.data.results);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-
-  //     fetchMovieReviews();
-  //   }, [movieId]);
 
   return (
     <div>

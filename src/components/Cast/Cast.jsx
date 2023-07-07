@@ -8,9 +8,7 @@ function Cast() {
 
   const fetchMovieCredits = useCallback(async () => {
     try {
-      const response = await axios.get(
-        `/movies/get-movie-credits?id=${movieId}`
-      );
+      const response = await axios.get(`/movie/${movieId}/credits`);
       setCast(response.data.cast);
     } catch (error) {
       console.log(error);

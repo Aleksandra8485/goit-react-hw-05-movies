@@ -3,7 +3,7 @@ import axios from 'axios';
 //Ustawienie baseURL dla wszystkich zapytań Axios
 //Ustawienie api_key jako domyślnego parametru
 const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = '5aa46e061141b6aa48191a62115cc996';
+export const API_KEY = '5aa46e061141b6aa48191a62115cc996';
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.params = {
