@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useParams, Outlet, Link } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 import axios from 'axios';
 
 //wyświetlenie informacji o wybranym filmie
@@ -33,11 +33,7 @@ function MovieDetails() {
 
   return (
     <div>
-      <h1>
-        <Link to={`/movies/${movieId}`}>{movie.title}</Link>
-      </h1>
-      <p>{movie.overview}</p>
-
+      <h1>{movie.title}</h1>
       <Outlet />
     </div>
   );

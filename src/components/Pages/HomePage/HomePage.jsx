@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getTrendingMovies, getMovieDetails } from 'utils/api';
+import { getTrendingMovies } from 'utils/api';
+import { Link } from 'react-router-dom';
 
 //HomePage odpowiada za wyświetlanie najpopularniejszych filmów na stronie głównej
 
@@ -20,23 +21,15 @@ function HomePage() {
     }
   };
 
-  //wyświetlanie informacji o filmie
-  const fetchMovieDetails = async movieId => {
-    try {
-      const movieDetails = await getMovieDetails(movieId);
-      console.log(movieDetails);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div>
       <h1>Trending Movies</h1>
       {movies.map(movie => (
-        <div key={movie.id} onClick={() => fetchMovieDetails(movie.id)}>
-          <h2>{movie.title}</h2>
-          <p>{movie.overview}</p>
+        <div key={movie.id}>
+          <h2>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          </h2>
+          {movie.overview && <p>{movie.overview}</p>}
         </div>
       ))}
     </div>
