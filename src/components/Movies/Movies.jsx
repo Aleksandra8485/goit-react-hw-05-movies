@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Movies = () => {
@@ -9,6 +9,8 @@ const Movies = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const [cast, setCast] = useState([]);
   const [reviews, setReviews] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleInputChange = event => {
     setSearchTerm(event.target.value);
@@ -20,14 +22,11 @@ const Movies = () => {
         `/search/search-movies?query=${searchTerm}`
       );
       setSearchResults(response.data.results);
-      setSelectedMovie(null);
-      setMovieDetails(null);
-      setCast([]);
-      setReviews([]);
     } catch (error) {
       console.log(error);
     }
   };
+
   const fetchMovieDetails = async movieId => {
     try {
       const response = await axios.get(
@@ -62,6 +61,7 @@ const Movies = () => {
   };
 
   const handleMovieClick = async movieId => {
+    console.log('handleMovieClick called', movieId);
     setSelectedMovie(movieId);
     setMovieDetails(null);
     setCast([]);
@@ -73,6 +73,7 @@ const Movies = () => {
         fetchMovieCredits(movieId),
         fetchMovieReviews(movieId),
       ]);
+      navigate(`/movies/${movieId}`);
     } catch (error) {
       console.log(error);
     }
@@ -108,13 +109,14 @@ const Movies = () => {
       ) : (
         <p>No search results</p>
       )}
+
       {selectedMovie && (
         <div>
+          <h2>Selected Movie</h2>
           {movieDetails ? (
             <div>
-              <h2>{movieDetails.title}</h2>
-              <p>{movieDetails.overview}</p>
-
+              <h3>Title: {movieDetails.title}</h3>
+              <p>Overview: {movieDetails.overview}</p>
               <h3>Cast</h3>
               {cast.map(person => (
                 <div key={person.id}>
@@ -122,18 +124,13 @@ const Movies = () => {
                   <p>{person.character}</p>
                 </div>
               ))}
-
               <h3>Reviews</h3>
-              {reviews.length > 0 ? (
-                reviews.map(review => (
-                  <div key={review.id}>
-                    <h4>{review.author}</h4>
-                    <p>{review.content}</p>
-                  </div>
-                ))
-              ) : (
-                <p>No reviews available</p>
-              )}
+              {reviews.map(review => (
+                <div key={review.id}>
+                  <h4>{review.author}</h4>
+                  <p>{review.content}</p>
+                </div>
+              ))}
             </div>
           ) : (
             <p>Loading movie details...</p>

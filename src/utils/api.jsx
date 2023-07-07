@@ -22,4 +22,15 @@ const getTrendingMovies = async () => {
   }
 };
 
-export { getTrendingMovies };
+//pobranie informacji o filmie na podstawie jego ID
+const getMovieDetails = async movieId => {
+  try {
+    const response = await axios.get(`/movie/${movieId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Błąd podczas pobierania informacji o filmie:', error);
+    throw error;
+  }
+};
+
+export { getTrendingMovies, getMovieDetails };
