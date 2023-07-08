@@ -6,13 +6,32 @@
 
 .nav {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
 }
 
-ul {
+.navList {
+  list-style-type: none;
   display: flex;
 }
 
-li {
-  list-style-type: none;
+.list {
+  margin-right: 10px;
+}
+
+.list a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+.list a:hover {
+  text-decoration: underline;
+}
+
+.list.noDecoration a {
+  text-decoration: none;
+}
+
+.list.noDecoration a:hover {
+  text-decoration: none;
 }

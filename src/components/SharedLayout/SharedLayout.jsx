@@ -7,11 +7,11 @@ const SharedLayout = () => {
     <>
       <header className={styles.header}>
         <nav className={styles.nav}>
-          <ul className={styles.ul}>
-            <li className={styles.li}>
+          <ul className={styles.navList}>
+            <li className={`${styles.list} ${styles.noDecoration}`}>
               <Link to="/">Home</Link>
             </li>
-            <li className={styles.li}>
+            <li className={styles.list}>
               <Link to="/movies">Movies</Link>
             </li>
           </ul>
