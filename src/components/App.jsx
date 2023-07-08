@@ -15,57 +15,19 @@ const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 const App = () => {
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/movies" element={<Movies />} />
-          <Route
-            path="/movies/:movieId"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <MovieDetails />
-              </Suspense>
-            }
-          >
-            <Route
-              path="cast"
-              element={
-                <Suspense fallback={<div>Loading...</div>}>
-                  <Cast />
-                </Suspense>
-              }
-            />
-            <Route
-              path="reviews"
-              element={
-                <Suspense fallback={<div>Loading...</div>}>
-                  <Reviews />
-                </Suspense>
-              }
-            />
+          <Route path="/movies/:movieId" element={<MovieDetails />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>
       </Routes>
-    </div>
+    </Suspense>
   );
 };
 
 export default App;
-
-// export const App = () => {
-//   return (
-//     <div
-//       style={{
-//         height: '100vh',
-//         display: 'flex',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         fontSize: 40,
-//         color: '#010101'
-//       }}
-//     >
-//       React homework template
-//     </div>
-//   );
-// };

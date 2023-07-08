@@ -46,10 +46,16 @@
   text-decoration: underline;
 }
 
-.castTitle {
+.cast {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   margin-top: 20px;
+}
+
+.castTitle {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .actorImage {
@@ -69,5 +75,31 @@
 }
 
 .actorCharacter {
+  margin-bottom: 0;
+}
+
+.activeLink {
+  font-weight: bold;
+}
+
+.reviews {
+  margin-top: 20px;
+}
+
+.reviewsTitle {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.reviewItem {
+  margin-bottom: 10px;
+}
+
+.reviewAuthor {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.reviewContent {
   margin-bottom: 0;
 }
