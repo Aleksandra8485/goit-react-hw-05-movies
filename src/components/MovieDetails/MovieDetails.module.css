@@ -46,9 +46,9 @@
   text-decoration: underline;
 }
 
-.cast {
+.castTitle {
   display: flex;
-  align-items: center;
+  align-items: start;
   margin-top: 20px;
 }
 
