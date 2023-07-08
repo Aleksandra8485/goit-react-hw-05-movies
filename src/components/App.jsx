@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/HomePage/HomePage';
 import Movies from './Movies/Movies';
 import SharedLayout from './SharedLayout/SharedLayout';
+// import css from './App.module.css';
 
 // import MovieDetails from './MovieDetails/MovieDetails';
 // import Cast from './Cast/Cast';
@@ -14,37 +15,39 @@ const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<SharedLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route
-          path="/movies/:movieId"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <MovieDetails />
-            </Suspense>
-          }
-        >
+    <div>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/movies" element={<Movies />} />
           <Route
-            path="cast"
+            path="/movies/:movieId"
             element={
               <Suspense fallback={<div>Loading...</div>}>
-                <Cast />
+                <MovieDetails />
               </Suspense>
             }
-          />
-          <Route
-            path="reviews"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Reviews />
-              </Suspense>
-            }
-          />
+          >
+            <Route
+              path="cast"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Cast />
+                </Suspense>
+              }
+            />
+            <Route
+              path="reviews"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Reviews />
+                </Suspense>
+              }
+            />
+          </Route>
         </Route>
-      </Route>
-    </Routes>
+      </Routes>
+    </div>
   );
 };
 

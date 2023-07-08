@@ -1,0 +1,48 @@
+/* MovieDetails.module.css */
+
+.movieDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.posterContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.poster {
+  width: 200px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.overview {
+  margin-bottom: 20px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+
+.links a {
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}

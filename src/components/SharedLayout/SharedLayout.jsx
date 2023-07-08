@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import styles from './SharedLayout.module.css';
 
 const SharedLayout = () => {
   return (
     <>
-      <header>
-        <nav>
-          <ul>
-            <li>
+      <header className={styles.header}>
+        <nav className={styles.nav}>
+          <ul className={styles.ul}>
+            <li className={styles.li}>
               <Link to="/">Home</Link>
             </li>
-            <li>
+            <li className={styles.li}>
               <Link to="/movies">Movies</Link>
             </li>
           </ul>

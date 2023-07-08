@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, Outlet, Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_KEY } from 'utils/api';
+import styles from './MovieDetails.module.css';
 
 //wyświetlenie informacji o wybranym filmie
 
@@ -62,16 +63,23 @@ function MovieDetails() {
 
   return (
     <div>
-      <h1>{movie.title}</h1>
-      <img
-        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-        alt={movie.title}
-      />
+      <div className={styles.posterContainer}>
+        <img
+          className={styles.poster}
+          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+          alt={movie.title}
+        />
 
-      <p>{movie.overview}</p>
+        <div className={styles.info}>
+          <h1 className={styles.title}>{movie.title}</h1>
+          <p className={styles.overview}>{movie.overview}</p>
 
-      <Link to={`/movies/${movieId}/cast`}>Cast: View Cast</Link>
-      <Link to={`/movies/${movieId}/reviews`}>Reviews: View Reviews</Link>
+          <div className={styles.links}>
+            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+          </div>
+        </div>
+      </div>
 
       <Outlet />
     </div>
