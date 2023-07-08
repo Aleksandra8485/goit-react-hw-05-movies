@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import { getMovieReviews } from 'utils/api';
 
 function Reviews() {
   const { movieId } = useParams();
@@ -8,8 +9,8 @@ function Reviews() {
 
   const fetchMovieReviews = useCallback(async () => {
     try {
-      const response = await axios.get(`/movie/${movieId}/reviews`);
-      setReviews(response.data.results);
+      const reviews = await getMovieReviews(movieId);
+      setReviews(reviews);
     } catch (error) {
       console.log(error);
     }

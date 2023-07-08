@@ -33,4 +33,15 @@ const getMovieDetails = async movieId => {
   }
 };
 
-export { getTrendingMovies, getMovieDetails };
+// Pobranie recenzji filmu na podstawie jego ID
+const getMovieReviews = async movieId => {
+  try {
+    const response = await axios.get(`/movie/${movieId}/reviews`);
+    return response.data.results;
+  } catch (error) {
+    console.error('Błąd podczas pobierania recenzji filmu:', error);
+    throw error;
+  }
+};
+
+export { getTrendingMovies, getMovieDetails, getMovieReviews };
