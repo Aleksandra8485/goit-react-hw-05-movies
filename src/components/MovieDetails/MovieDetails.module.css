@@ -1,5 +1,3 @@
-/* MovieDetails.module.css */
-
 .movieDetails {
   display: flex;
   flex-direction: column;
@@ -11,6 +9,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  margin-bottom: 20px;
 }
 
 .poster {
@@ -45,4 +44,30 @@
 
 .links a:hover {
   text-decoration: underline;
+}
+
+.cast {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.actorImage {
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.actorDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.actorName {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.actorCharacter {
+  margin-bottom: 0;
 }

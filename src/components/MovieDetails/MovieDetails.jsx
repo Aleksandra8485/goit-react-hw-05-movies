@@ -9,7 +9,7 @@ import styles from './MovieDetails.module.css';
 function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-  // const [cast, setCast] = useState([]);
+  const [cast, setCast] = useState([]);
   // const [reviews, setReviews] = useState([]);
 
   const fetchMovieDetails = useCallback(async () => {
@@ -20,6 +20,19 @@ function MovieDetails() {
         },
       });
       setMovie(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [movieId]);
+
+  const fetchCastDetails = useCallback(async () => {
+    try {
+      const response = await axios.get(`/movie/${movieId}/credits`, {
+        params: {
+          api_key: API_KEY,
+        },
+      });
+      setCast(response.data.cast[0]);
     } catch (error) {
       console.log(error);
     }
@@ -53,16 +66,17 @@ function MovieDetails() {
 
   useEffect(() => {
     fetchMovieDetails();
+    fetchCastDetails();
     // fetchMovieCredits();
     // fetchMovieReviews();
-  }, [fetchMovieDetails]);
+  }, [fetchMovieDetails, fetchCastDetails]);
 
   if (!movie) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div>
+    <div className={styles.movieDetails}>
       <div className={styles.posterContainer}>
         <img
           className={styles.poster}
@@ -75,13 +89,30 @@ function MovieDetails() {
           <p className={styles.overview}>{movie.overview}</p>
 
           <div className={styles.links}>
-            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+            <Link to={`/movies/${movieId}/cast`}>Cast: View Cast</Link>
+            <Link to={`/movies/${movieId}/reviews`}>Reviews: View Reviews</Link>
           </div>
         </div>
       </div>
 
       <Outlet />
+
+      {cast && (
+        <div className={styles.cast}>
+          <h2 className={styles.castTitle}>Actor</h2>
+          <div className={styles.actor}>
+            <img
+              className={styles.actorImage}
+              src={`https://image.tmdb.org/t/p/w200${cast.profile_path}`}
+              alt={cast.name}
+            />
+            <div className={styles.actorDetails}>
+              <h3 className={styles.actorName}>{cast.name}</h3>
+              <p className={styles.actorCharacter}>{cast.character}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

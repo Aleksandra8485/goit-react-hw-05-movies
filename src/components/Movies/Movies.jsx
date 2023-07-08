@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_KEY } from 'utils/api';
+import styles from './Movies.module.css';
 
 const Movies = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -31,21 +32,25 @@ const Movies = () => {
   };
 
   return (
-    <div>
-      <h1>Movies</h1>
-      <Link to="/">Go back</Link>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Movies</h1>
+      <Link className={styles.goBack} to="/">
+        Go back
+      </Link>
 
-      <div>
+      <div className={styles.searchContainer}>
         <input type="text" value={searchTerm} onChange={handleInputChange} />
-        <button onClick={handleSearch}>Search</button>
+        <button className={styles.searchButton} onClick={handleSearch}>
+          Search
+        </button>
       </div>
 
       {searchResults.length > 0 ? (
-        <div>
-          <h2>Search Results</h2>
+        <div className={styles.resultsContainer}>
+          <h2 className={styles.resultsTitle}>Search Results</h2>
           {searchResults.map(movie => (
-            <div key={movie.id}>
-              <h3>
+            <div key={movie.id} className={styles.movie}>
+              <h3 className={styles.movieTitle}>
                 <Link
                   to={`/movies/${movie.id}`}
                   onClick={() => handleMovieClick(movie.id)}
@@ -53,12 +58,12 @@ const Movies = () => {
                   {movie.title}
                 </Link>
               </h3>
-              <p>{movie.overview}</p>
+              <p className={styles.movieOverview}>{movie.overview}</p>
             </div>
           ))}
         </div>
       ) : (
-        <p>No search results</p>
+        <p className={styles.noResults}>No search results</p>
       )}
     </div>
   );
