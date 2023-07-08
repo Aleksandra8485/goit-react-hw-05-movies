@@ -1,23 +1,23 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { getMovieCast } from 'utils/api';
 
 function Cast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
 
-  const fetchMovieCredits = useCallback(async () => {
+  const fetchMovieCast = useCallback(async () => {
     try {
-      const response = await axios.get(`/movie/${movieId}/credits`);
-      setCast(response.data.cast);
+      const castData = await getMovieCast(movieId);
+      setCast(castData);
     } catch (error) {
       console.log(error);
     }
   }, [movieId]);
 
   useEffect(() => {
-    fetchMovieCredits();
-  }, [fetchMovieCredits]);
+    fetchMovieCast();
+  }, [fetchMovieCast]);
 
   return (
     <div>

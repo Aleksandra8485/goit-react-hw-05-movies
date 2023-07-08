@@ -44,4 +44,15 @@ const getMovieReviews = async movieId => {
   }
 };
 
-export { getTrendingMovies, getMovieDetails, getMovieReviews };
+// Pobranie obsady filmu na podstawie jego ID
+const getMovieCast = async movieId => {
+  try {
+    const response = await axios.get(`/movie/${movieId}/credits`);
+    return response.data.cast;
+  } catch (error) {
+    console.error('Błąd podczas pobierania obsady filmu:', error);
+    throw error;
+  }
+};
+
+export { getTrendingMovies, getMovieDetails, getMovieReviews, getMovieCast };
